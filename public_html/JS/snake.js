@@ -2,6 +2,8 @@ var snake;
 var snakeLength;
 var snakeSize;
 
+var food;
+
 var context;
 var screenWidth;
 var screenHeight;
@@ -59,7 +61,27 @@ function snakeUpdate() {
     var snakeHeadX = snake[0].x;
     var snakeHeadY = snake[0].y;
 
+     snakeHeadX++;
+     
+     var snakeTail = snake.pop();
+     snakeTail.x = snakeHeadX;
+     snakeTail.y = snakeHeadY;
+     snake.unshift(snakeTail);
 }
+
+function  foodInitialize () {
+    food = {
+       x: 0,
+       y: 0
+    };
+}
+
+function foodDraw() {
+    context.fillStyle = "white";
+    context.fillRect (food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
+}
+ 
+        
 
 
 
