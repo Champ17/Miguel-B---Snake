@@ -1,10 +1,39 @@
 body{
     margin: 0;
     padding: 0;
-    
 }
 
 #game-screen{
     display: block
+}
+
+#game-over,#playHud {
+    position: absolute;
+    visibility: hidden;
+}
+
+h1,h2,h3{
+    font-family: 'Permanent Marker', cursive;
+    color: black;
+    text-align: center;
+}
+
+.title{
+    font-size: 62px;
+    margin-bottom: 10px;
+    
+}
+
+#restartButton{
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#restartButton:hover{
+    background-color: red;
+}
+
+#scoreboard{
+    margin: 0px;
 }
 

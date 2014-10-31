@@ -15,6 +15,11 @@ var screenWidth;
 var screenHeight;
 
 var gameState;
+var gameOverMenu;
+var restartButton;
+var playHud;
+var scoreBoard;
+
 
 /*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
  * Executing Game Code
@@ -23,7 +28,7 @@ var gameState;
 gameInitialize();
 snakeInitialize();
 foodInitialize();
-setInterval(gameLoop, 1000 / 60);
+setInterval(gameLoop, 1000 /30);
 
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
  *   Game Functions
@@ -41,12 +46,23 @@ function gameInitialize() {
     canvas.height = screenHeight;
 
     document.addEventListener("keydown", keyboardHandler);
+    
+    gameOverMenu = document.getElementById("game-over");
+    
+    centerMenuPosition(gameOverMenu);
+    
+    restartButton = document.getElementById("restartButton");
+    restartButton.addEventListener("click", gameRestart);
+    
+    playHud = document.getElementById("playHud");
+    scoreboard = document.getElementById(scoreboard);
 
     setState("PLAY");
 }
 
 function gameLoop() {
     gameDraw();
+   // drawScoreboard();
     if (gameState == "PLAY") {
         snakeUpdate();
         snakeDraw();
@@ -59,6 +75,13 @@ function gameDraw() {
     context.fillRect(0, 0, screenWidth, screenHeight);
 }
 
+function gameRestart(){
+    snakeInitialize();
+    foodInitialize();
+    hideMenu(gameOverMenu);
+    setState("PLAY");
+}
+
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
  * Snake Functions
  * $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -66,7 +89,7 @@ function gameDraw() {
 
 function snakeInitialize() {
     snake = [];
-    snakeLength = 5;
+    snakeLength = 3;
     snakeSize = 20;
     snakeDirection = "down";
 
@@ -182,20 +205,53 @@ function checkWallCollisions(snakeHeadX, snakeHeadY) {
     if (snakeHeadX * snakeSize >= screenWidth || snakeHeadX * snakeSize < 0) {
         setState("GAME OVER");
 }
-    if (snakeHeadY * snakeSize >= screenWidth || snakeHeadY * snakeSize < 0) {
+    if (snakeHeadY * snakeSize >= screenHeight || snakeHeadY * snakeSize < 0) {
         setState("GAME OVER");
         }
+        
         
 
     }
 
-    /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      * Game State Handling
-     * $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+     * $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      */
 
     function setState(state) {
         gameState = state;
+        showMenu(state);
+}
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ * Meenu Functions
+ * $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ */
+
+function displayMenu(menu) {
+    menu.style.visibility = "visible";
+}
+
+function hideMenu(menu){
+    menu.style.visibility = "hidden";
+}
+
+
+function showMenu(state){
+    if(state == "GAME OVER"){
+        displayMenu(gameOverMenu);        
+    }
+    else if(state == "PLAY"){
+        displayMenu(playHud);
+    }
+}
+
+function centerMenuPosition(menu){
+    menu.style.top = (screenHeight / 2) - (menu.offsetHeight / 2) + "px";
+    menu.style.left = (screenWidth / 2) - (menu.offsetWidth / 2) + "px";
+}
+
+function drawScoreboard(){
+    scoreBoard.innerHTML =  "Score: "+ snakeLength;
 }
 
     
