@@ -7,7 +7,7 @@ body{
     display: block
 }
 
-#game-over,#playHud {
+#game-over,#playHud,#game-start {
     position: absolute;
     visibility: hidden;
 }
@@ -21,19 +21,25 @@ h1,h2,h3{
 .title{
     font-size: 62px;
     margin-bottom: 10px;
-    
+
 }
 
-#restartButton{
+#restartButton,#playbutton{
     border: 2px solid black;
     border-radius: 10px;
 }
 
-#restartButton:hover{
+#restartButton:hover, #music:hover,#playbutton:hover{
     background-color: red;
 }
 
 #scoreboard{
     margin: 0px;
+    padding: 167px;
+}
+
+#music {
+    position: absolute;
+    border: 2px solid black;
 }
 

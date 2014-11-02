@@ -14,13 +14,22 @@ and open the template in the editor.
     </head>
     <body>
         <section id="playHud">
-            <h2 id="scoreboard"></h2>
+            <h2 id="scoreboard">Score</h2>
         </section>
         <section id="game-over">
             <h1 class="title">GAME OVER!</h1>
             <h3 id="restartButton">Restart?</h3>
         </section>
-         
+        
+         <section id="game-start">
+            <h1 class="title" id="hi">Miguel Banuelos Snake</h1>
+            <h3 id="playButton">Ready Go!</h3>
+        </section>
+        
+        <audio controls autoplay id="music">
+            <source src="audio/Luigi_s Mansion theme song.mp3" type="audio/mpeg">
+            Your browser does not support the <code>audio</code> tag.
+        </audio>
         <canvas id="game-screen"></canvas><!--this is gonna be my game screen on the game snake-->
 
         <script src="JS/snake.js"></script>
