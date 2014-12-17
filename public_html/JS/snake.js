@@ -23,6 +23,7 @@ var playHud;
 var scoreBoard;
 
 
+
 /*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
  * Executing Game Code
  * $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -113,6 +114,8 @@ function snakeDraw() {
     for (var index = 0; index < snake.length; index++) {
         context.fillStyle = "red";
         context.fillRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
+        context.strokeStyle = "black";
+        context.strokeRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
     }
 }
 
@@ -206,7 +209,10 @@ function checkFoodCollisions(snakeHeadX, snakeHeadY) {
         });
         snakeLength++;
         setFoodPosition();
-    }
+        
+        
+        audio();
+        this.load.audio('eat_audio','audio/kk.wav');    }
 }
 
 function checkWallCollisions(snakeHeadX, snakeHeadY) {
@@ -263,5 +269,4 @@ function centerMenuPosition(menu) {
 function drawScoreboard() {
     scoreboard.innerHTML = "Score: " + snakeLength;
 }
-
-    
+  
